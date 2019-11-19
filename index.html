@@ -144,19 +144,19 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-deeplearning" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-object-detection-summary" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/deeplearning/">深度学习</a>
+      <a class="article-title" href="/2019/11/18/object-detection-summary/">目标检测</a>
     </h1>
   
 
         
-        <a href="/2019/11/18/deeplearning/" class="archive-article-date">
+        <a href="/2019/11/18/object-detection-summary/" class="archive-article-date">
   	<time datetime="2019-11-18T11:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
 </a>
         
@@ -164,7 +164,241 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h3>
+        <p>读的论文的题目：<br><strong>R-CNN</strong>:Rich feature hierarchies for accurate object detection and semantic segmentation<br><strong>Fast R-CNN</strong>:Fast R-CNN<br><strong>Faster R-CNN</strong>:Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks<br><strong>SPP</strong>:Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition<br><strong>Mimick</strong>:Mimicking Very Efficient Network for Object Detection</p>
+<hr>
+<p>下面主要写，这五种方法的简述，优点，缺点，性能的比较,以及对Mimic方#法改进的思路  </p>
+<h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><h3 id="R-CNN的简述："><a href="#R-CNN的简述：" class="headerlink" title="R-CNN的简述："></a>R-CNN的简述：</h3><ol>
+<li>用Selective search产生类无关的候选域  </li>
+<li>用大的CNN网络，从候选域中提取出固定长度的特征  </li>
+<li>用一系列的SVM分类  </li>
+</ol>
+<p>训练过程： 有监督的预训练+特定领域的微调<br>有监督的预训练：使用ILSVRC 2012数据集预训练CNN网络<br>特定领域的微调：使用VOC数据集对CNN网络进行微调，优化SVM,bounding-box回归   </p>
+<h3 id="R-CNN的优点"><a href="#R-CNN的优点" class="headerlink" title="R-CNN的优点"></a>R-CNN的优点</h3><p>相对与以前基于HOG和SIFT的目标检测方法，精确率提高了很多，mAP提高了大概20%    </p>
+<h3 id="R-CNN的缺点"><a href="#R-CNN的缺点" class="headerlink" title="R-CNN的缺点"></a>R-CNN的缺点</h3><ol>
+<li>训练需要分为几个阶段：预训练，微调CNN,优化SVM,训练bounding-box 回归  </li>
+<li>训练耗费空间大：需要1.8GB存储特征</li>
+<li>物体检测速度慢：7层网络结构每张图片需要10s,16层网络结构每张图片需要53s</li>
+</ol>
+<h1 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h1><h3 id="Fast-R-CNN的简述："><a href="#Fast-R-CNN的简述：" class="headerlink" title="Fast R-CNN的简述："></a>Fast R-CNN的简述：</h3><ol>
+<li>输入整张图片和一些物体候选域，通过一系列卷积层和池化层产生整张图片的feature map</li>
+<li>为每个RoI,池化层从feature map中提取出固定长度的特征向量</li>
+<li>特征输入到一系列全连接层，输出：k+1类的概率，每个类的一个四元组，用于bounding box回归  </li>
+</ol>
+<p>对R-CNN的改进：  </p>
+<ol>
+<li>来自同一图片的RoI共享前向和后向传播的计算和内存  </li>
+<li>使用了Multi-task loss:实现了end-to-end的训练</li>
+</ol>
+<p>###Fast R-CNN的优点 ###</p>
+<ol>
+<li>训练是单阶段的</li>
+<li>特征不需要缓存到磁盘中去  </li>
+</ol>
+<h3 id="Fast-R-CNN的缺点"><a href="#Fast-R-CNN的缺点" class="headerlink" title="Fast R-CNN的缺点"></a>Fast R-CNN的缺点</h3><p>产生物体的候选域存在时间瓶颈  </p>
+<h1 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h1><h3 id="Faster-R-CNN简述"><a href="#Faster-R-CNN简述" class="headerlink" title="Faster R-CNN简述"></a>Faster R-CNN简述</h3><p>候选域的产生使用RPN，物体检测使用Fast R-CNN</p>
+<h3 id="Faster-R-CNN的优点"><a href="#Faster-R-CNN的优点" class="headerlink" title="Faster R-CNN的优点"></a>Faster R-CNN的优点</h3><p>检测速度快，精确率高  </p>
+<h1 id="SPP"><a href="#SPP" class="headerlink" title="SPP"></a>SPP</h1><h3 id="SPP简述"><a href="#SPP简述" class="headerlink" title="SPP简述"></a>SPP简述</h3><p>计算整张图片的Feature map一次，使用SPP为每个候选域提取固定长度的特征  </p>
+<h3 id="SPP的优点"><a href="#SPP的优点" class="headerlink" title="SPP的优点"></a>SPP的优点</h3><ol>
+<li>接收可变大小的输入  </li>
+<li>各个patch块之间共享卷积计算<h3 id="SPP的缺点"><a href="#SPP的缺点" class="headerlink" title="SPP的缺点"></a>SPP的缺点</h3>训练个测试都分为几个阶段，所以速度比较慢<br>无法更新SPP层后面的层，反向传播是高度无效的  <h1 id="Mimick"><a href="#Mimick" class="headerlink" title="Mimick#"></a>Mimick#</h1><h3 id="Mimick简述"><a href="#Mimick简述" class="headerlink" title="Mimick简述"></a>Mimick简述</h3>用Faster R-CNN网络和真实数据监督训练一个小的网络<br>训练：使用模仿的方法训练RPN,产生候选域，然后用RPN产生的候选域微调Faster-RCNN<h3 id="Mimick的优点"><a href="#Mimick的优点" class="headerlink" title="Mimick的优点"></a>Mimick的优点</h3>在使用比大网络少的参数和时间的情况下，达到跟大网络相近的检测精确度<h3 id="Mimick的缺点"><a href="#Mimick的缺点" class="headerlink" title="Mimick的缺点"></a>Mimick的缺点</h3>目标检测的精确度没有提高<h1 id="五种方法性能比较"><a href="#五种方法性能比较" class="headerlink" title="五种方法性能比较"></a>五种方法性能比较</h1><h3 id="测试时间比较"><a href="#测试时间比较" class="headerlink" title="测试时间比较"></a>测试时间比较</h3></li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">网络结构</th>
+<th align="center">设备</th>
+<th align="right">时间（s）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R-CNN</td>
+<td align="center">T-Net(7层)</td>
+<td align="center">Nvidia Titan Black GPU</td>
+<td align="right">10</td>
+</tr>
+<tr>
+<td>R-CNN</td>
+<td align="center">T-Net(7层)</td>
+<td align="center">CPU</td>
+<td align="right">53</td>
+</tr>
+<tr>
+<td>Fast R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="center">Nvidia K40 GPU</td>
+<td align="right">0.32</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="center">K40GPU</td>
+<td align="right">0.178</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">ZF(7层)</td>
+<td align="center">K40GPU</td>
+<td align="right">0.059</td>
+</tr>
+<tr>
+<td>SPP（1尺度）</td>
+<td align="center">ZF(7层)</td>
+<td align="center">GeForce GTX Titan GPU(6GB)</td>
+<td align="right">0.142</td>
+</tr>
+<tr>
+<td>SPP（5尺度）</td>
+<td align="center">ZF(7层)</td>
+<td align="center">GeForce GTX Titan GPU(6GB)</td>
+<td align="right">14.46</td>
+</tr>
+<tr>
+<td>1/2-Mimic-finetune</td>
+<td align="center">VGG16(16层)</td>
+<td align="center">TITANX</td>
+<td align="right">0.0228</td>
+</tr>
+<tr>
+<td>### mAP比较 ###</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+<tr>
+<td>训练集：VOC 2012,测试集： VOC 2010</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">网络结构</th>
+<th align="right">mAP(%)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R-CNN</td>
+<td align="center">T-Net(7层)</td>
+<td align="right">53.7</td>
+</tr>
+<tr>
+<td>R-CNN</td>
+<td align="center">O-Net(16层)</td>
+<td align="right">62.9</td>
+</tr>
+<tr>
+<td>Fast R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">66.1</td>
+</tr>
+<tr>
+<td>训练集：VOC 2007,测试集：VOC 2007</td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">网络结构</th>
+<th align="right">mAP(%)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>R-CNN</td>
+<td align="center">T-Net(7层)</td>
+<td align="right">58.5</td>
+</tr>
+<tr>
+<td>R-CNN</td>
+<td align="center">O-Net(16层)</td>
+<td align="right">66.0</td>
+</tr>
+<tr>
+<td>Fast R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">66.9</td>
+</tr>
+<tr>
+<td>SPP(1尺度)</td>
+<td align="center">ZF(7层)</td>
+<td align="right">58</td>
+</tr>
+<tr>
+<td>SPP(5尺度)</td>
+<td align="center">ZF(7层)</td>
+<td align="right">59.2</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">ZF(7层)</td>
+<td align="right">59.9</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">69.9</td>
+</tr>
+<tr>
+<td>训练集：VOC 07+12(07的训练验证集加12的训练验证集),测试集：VOC 2007</td>
+<td align="center"></td>
+<td align="right"></td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th align="center">网络结构</th>
+<th align="right">mAP(%)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Fast R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">70.0</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">ZF(7层)</td>
+<td align="right">59.9</td>
+</tr>
+<tr>
+<td>Faster R-CNN</td>
+<td align="center">VGG16(16层)</td>
+<td align="right"><strong>73.2</strong></td>
+</tr>
+<tr>
+<td>1/2-Mimic-finetune</td>
+<td align="center">VGG16(16层)</td>
+<td align="right"><strong>72.79</strong></td>
+</tr>
+<tr>
+<td>1/4-Mimic-finetune</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">65.76</td>
+</tr>
+<tr>
+<td>1/4-two-Mimic</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">67.66</td>
+</tr>
+<tr>
+<td>1/8-two-Mimic</td>
+<td align="center">VGG16(16层)</td>
+<td align="right">56.14</td>
+</tr>
+</tbody></table>
+<p>其他训练集和测试集下的mAP,网络结构都是VGG16(16层)</p>
+<p>| 方法            | 训练集 | 测试集 | mAP(%) |<br>| ————- |:————-:| —-:|<br>|Fast R-CNN|07\diff|07|68.1|<br>|Fast R-CNN|07++12|10|68.8|<br>|Fast R-CNN|07++12|12|68.4|<br>|Fast R-CNN|12|12|65.7|<br>|Faster R-CNN|COCO+07+12|07|<strong>78.8</strong>|<br>|Faster R-CNN|12|12|67.0|<br>|Faster R-CNN|07++12|12|<strong>70.4</strong>|<br>|Faster R-CNN|COCO+07++12|12|<strong>75.9</strong>|</p>
+<h1 id="Mimic方法改进"><a href="#Mimic方法改进" class="headerlink" title="Mimic方法改进"></a>Mimic方法改进</h1><p>原来的网络结构为：<br><img src="http://i.imgur.com/c0qa9Jt.png" alt=""><br>改进后的网络结构为：<br><img src="http://i.imgur.com/hqkm9SH.png" alt="">  </p>
+<p>原来的损失函数为：<br>$$ L(W)= \lambda_1 L_m (W)+L_ {gt} (W) $$<br>$$ L_m(W)= \frac{1}{2N}\sum_ {i}\frac{1}{m_i}||u^{(i)}-r(v^{(i)})||_ {2}^{2} $$<br>$$ L_ {gt}=L_ {cls}(W)+\lambda_ {2}L_ {reg}(W) $$<br>修改后的损失函数为：<br>$$ L1_m(W)= \frac{1}{2N}\sum_ {i}\frac{1}{m_i}||u_1^{(i)}-r(v^{(i)})||<em>2^2 $$<br>$$ L2_m(W)= \frac{1}{2N}\sum</em> {i}\frac{1}{m_i}||u_2^{(i)}-r(v^{(i)})||<em>2^2 $$<br>$$ L_m(W)=x</em> {1}L1_m+x_ {2}L2_m $$<br>如果大网络1检测到了物体\(x_ {1}=1\)否则等于0<br>如果大网络2检测到了物体\(x_ {2}=1\)否则等于0<br>损失函数可以理解为：如果那个大网络检测到了物体则可以理解为，这个网络对这张图片提取的feature map比较好，应该用这个网络来监督小网络训练，如果大网络没有检测到物体，那么说明这个大网络对这张图片提取的feature map不好，不应该用来误导小网络<br>使用的两个大网络要仔细选择，计算特征的方法不同，但性能相差不多的网络，比如选fast rcnn和faster rcnn就不好，因为这两个网络计算的特征应该是比较像的，而且faster明显优于fast，这样的话fast的贡献就太少了</p>
+
       
 
       
@@ -177,80 +411,15 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">深度学习</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">R-CNN</a>
         		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/deeplearning/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" target="_blank" rel="noopener" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-objdetection" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/11/18/objdetection/">目标检测</a>
-    </h1>
-  
-
-        
-        <a href="/2019/11/18/objdetection/" class="archive-article-date">
-  	<time datetime="2019-11-18T11:42:40.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="placeholder"><a href="#placeholder" class="headerlink" title="placeholder"></a>placeholder</h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
+      		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">目标检测</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color1">Fast R-CNN</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color3">Faster R-CNN</a>
         		</li>
       		
 		</ul>
@@ -271,7 +440,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/11/18/objdetection/">展开全文 >></a>
+          <a class="article-more-a" href="/2019/11/18/object-detection-summary/">展开全文 >></a>
         </p>
       
 
@@ -475,15 +644,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">深度学习</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">目标检测</a>
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">R-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color1">Fast R-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">Faster R-CNN</a>
               </li>
             
             <div class="clearfix"></div>
