@@ -18,7 +18,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http:&#x2F;&#x2F;i.imgur.com&#x2F;c0qa9Jt.png">
 <meta property="og:image" content="http:&#x2F;&#x2F;i.imgur.com&#x2F;hqkm9SH.png">
-<meta property="og:updated_time" content="2019-11-19T07:32:57.552Z">
+<meta property="og:updated_time" content="2019-11-19T07:41:06.280Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http:&#x2F;&#x2F;i.imgur.com&#x2F;c0qa9Jt.png">
   
@@ -172,7 +172,7 @@
 <a id="more"></a>
 <p>读的论文的题目：<br><strong>R-CNN</strong>:Rich feature hierarchies for accurate object detection and semantic segmentation<br><strong>Fast R-CNN</strong>:Fast R-CNN<br><strong>Faster R-CNN</strong>:Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks<br><strong>SPP</strong>:Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition<br><strong>Mimick</strong>:Mimicking Very Efficient Network for Object Detection</p>
 <hr>
-<p>下面主要写，这五种方法的简述，优点，缺点，性能的比较,以及对Mimic方#法改进的思路  </p>
+<p>下面主要写，这五种方法的简述，优点，缺点，性能的比较,以及对Mimic方法改进的思路  </p>
 <h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><h3 id="R-CNN的简述："><a href="#R-CNN的简述：" class="headerlink" title="R-CNN的简述："></a>R-CNN的简述：</h3><ol>
 <li>用Selective search产生类无关的候选域  </li>
 <li>用大的CNN网络，从候选域中提取出固定长度的特征  </li>
@@ -206,7 +206,7 @@
 <h1 id="SPP"><a href="#SPP" class="headerlink" title="SPP"></a>SPP</h1><h3 id="SPP简述"><a href="#SPP简述" class="headerlink" title="SPP简述"></a>SPP简述</h3><p>计算整张图片的Feature map一次，使用SPP为每个候选域提取固定长度的特征  </p>
 <h3 id="SPP的优点"><a href="#SPP的优点" class="headerlink" title="SPP的优点"></a>SPP的优点</h3><ol>
 <li>接收可变大小的输入  </li>
-<li>各个patch块之间共享卷积计算<h3 id="SPP的缺点"><a href="#SPP的缺点" class="headerlink" title="SPP的缺点"></a>SPP的缺点</h3>训练个测试都分为几个阶段，所以速度比较慢<br>无法更新SPP层后面的层，反向传播是高度无效的  <h1 id="Mimick"><a href="#Mimick" class="headerlink" title="Mimick#"></a>Mimick#</h1><h3 id="Mimick简述"><a href="#Mimick简述" class="headerlink" title="Mimick简述"></a>Mimick简述</h3>用Faster R-CNN网络和真实数据监督训练一个小的网络<br>训练：使用模仿的方法训练RPN,产生候选域，然后用RPN产生的候选域微调Faster-RCNN<h3 id="Mimick的优点"><a href="#Mimick的优点" class="headerlink" title="Mimick的优点"></a>Mimick的优点</h3>在使用比大网络少的参数和时间的情况下，达到跟大网络相近的检测精确度<h3 id="Mimick的缺点"><a href="#Mimick的缺点" class="headerlink" title="Mimick的缺点"></a>Mimick的缺点</h3>目标检测的精确度没有提高<h1 id="五种方法性能比较"><a href="#五种方法性能比较" class="headerlink" title="五种方法性能比较"></a>五种方法性能比较</h1><h3 id="测试时间比较"><a href="#测试时间比较" class="headerlink" title="测试时间比较"></a>测试时间比较</h3></li>
+<li>各个patch块之间共享卷积计算<h3 id="SPP的缺点"><a href="#SPP的缺点" class="headerlink" title="SPP的缺点"></a>SPP的缺点</h3>训练和测试都分为几个阶段，所以速度比较慢<br>无法更新SPP层后面的层，反向传播是高度无效的  <h1 id="Mimick"><a href="#Mimick" class="headerlink" title="Mimick"></a>Mimick</h1><h3 id="Mimick简述"><a href="#Mimick简述" class="headerlink" title="Mimick简述"></a>Mimick简述</h3>用Faster R-CNN网络和真实数据监督训练一个小的网络<br>训练：使用模仿的方法训练RPN,产生候选域，然后用RPN产生的候选域微调Faster-RCNN<h3 id="Mimick的优点"><a href="#Mimick的优点" class="headerlink" title="Mimick的优点"></a>Mimick的优点</h3>在使用比大网络少的参数和时间的情况下，达到跟大网络相近的检测精确度<h3 id="Mimick的缺点"><a href="#Mimick的缺点" class="headerlink" title="Mimick的缺点"></a>Mimick的缺点</h3>目标检测的精确度没有提高<h1 id="五种方法性能比较"><a href="#五种方法性能比较" class="headerlink" title="五种方法性能比较"></a>五种方法性能比较</h1><h3 id="测试时间比较"><a href="#测试时间比较" class="headerlink" title="测试时间比较"></a>测试时间比较</h3></li>
 </ol>
 <table>
 <thead>
