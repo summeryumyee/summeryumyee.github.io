@@ -30,7 +30,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;t11.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;t12.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;t13.png">
-<meta property="og:updated_time" content="2019-11-20T11:47:30.871Z">
+<meta property="og:updated_time" content="2019-11-21T06:57:22.840Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;t0.png">
   
@@ -200,7 +200,7 @@
 <p>下载Proto<br>目的是将proto文件转成py文件<br>下载Protobuf网址：<a href="https://github.com/google/protobuf/releases" target="_blank" rel="noopener">https://github.com/google/protobuf/releases</a><br>选择相应版本进行下载<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t1.png" alt="avatar"><br>下载后进行解压<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t2.png" alt="avatar"><br>将bin文件夹的路径添加到环境变量：<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t3.png" alt="avatar"><br>打开cmd,输入protoc 输出如下信息则表示添加环境变量成功：<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t4.png" alt="avatar"></p>
 </blockquote>
 <h3 id="第三步："><a href="#第三步：" class="headerlink" title="第三步："></a>第三步：</h3><blockquote>
-<p>使用protoc编译文件<br>在 models/research 目录下，打开命令行窗口，执行以下语句：<br><font size="4" color="red">protoc object_detection/protos/*.proto –python_out=. </font><br>此步骤将object_detection/protoc文件夹内的.proto文件编译为.py文件<br><br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t5.png" alt="avatar"><br>成功后进入models\research\object_detection\protos<br>查看是否编译为.py文件<br><br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t6.png" alt="avatar"><br><br>配置路径文件<br>在site-packages添加一个路径文件，如tensorflow_model.pth，必须以.pth为后缀，写上你要加入的模块文件所在的目录名称。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t7.png" alt="avatar"><br><br><br>文件内容<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t8.png" alt="avatar"><br>至此object detection API已经配置完毕</p>
+<p>使用protoc编译文件<br>在 models/research 目录下，打开命令行窗口，执行以下语句：<br><font size="4" color="red">protoc object_detection/protos/*.proto –python_out=.</font><br>此步骤将object_detection/protoc文件夹内的.proto文件编译为.py文件<br><br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t5.png" alt="avatar"><br>成功后进入models\research\object_detection\protos<br>查看是否编译为.py文件<br><br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t6.png" alt="avatar"><br><br>配置路径文件<br>在site-packages添加一个路径文件，如tensorflow_model.pth，必须以.pth为后缀，写上你要加入的模块文件所在的目录名称。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t7.png" alt="avatar"><br><br><br>文件内容<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t8.png" alt="avatar"><br>至此object detection API已经配置完毕</p>
 </blockquote>
 <h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步:"></a>第四步:</h3><blockquote>
 <p>接下来需要测试一下:<br>我这里用Atom打开文件models项目：整个目录如下图所示<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t9.png" alt="avatar"><br>在research/object_detection文件夹下新建一个python文件，命名为object_detection_tutorial<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/t10.png" alt="avatar"><br>文件内容如下：</p>
@@ -331,7 +331,7 @@
   
   
     <a href="/2019/11/19/object-detection-summary/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">目标检测常用算法</div>
+      <div class="article-nav-title">目标检测部分算法</div>
       <i class="icon-circle-right"></i>
     </a>
   
