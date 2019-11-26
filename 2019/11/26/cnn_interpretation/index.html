@@ -30,7 +30,8 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN11.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN12.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN13.png">
-<meta property="og:updated_time" content="2019-11-26T10:12:42.001Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN14.png">
+<meta property="og:updated_time" content="2019-11-26T10:31:07.596Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
@@ -244,6 +245,16 @@
 
 <p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN13.png" alt></p>
 <center><font color="red">应用于整流后的特征图的池化</font></center>
+
+<p>池化的功能是逐渐减小输入表示的空间大小</p>
+<ul>
+<li>使输入表示形式（特征尺寸）更小，更易于管理.</li>
+<li>减少了网络中参数和计算的数量，因此，控制过拟合.</li>
+<li>使网络对于输入图像中的小变形，畸变和平移不变(输入中的小畸变不会改变Pooling的输出-因为我们在局部邻域中取最大值/平均值).</li>
+<li>帮助我们获得图像的几乎不变的不变表示（确切的术语是“相等”）。这是非常强大的功能，因为无论对象位于何处，我们都可以检测到它们.</li>
+</ul>
+<h3 id="快结束了！！"><a href="#快结束了！！" class="headerlink" title="快结束了！！"></a>快结束了！！</h3><p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN14.png" alt></p>
+<p>到目前为止，我们已经了解了卷积，ReLU和池化如何工作。重要的是要了解这些层是任何CNN的基本构建基块。如上图所示，我们有两组卷积，ReLU和Pooling层-第二卷积层使用六个过滤器在第一池化层的输出上执行卷积，以生成总共六个特征图。然后，将ReLU分别应用于所有这六个功能图。然后，我们分别对六个整流后的特征图执行最大池化操作。</p>
 
       
 
@@ -492,15 +503,19 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">SSD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">SSD-mobilev1</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">CNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -513,10 +528,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">Faster R-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
               </li>
             
             <div class="clearfix"></div>
