@@ -21,7 +21,12 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN4.gif">
-<meta property="og:updated_time" content="2019-11-26T08:58:42.221Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN5.jpg">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN6.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN7.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN8.gif">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN9.png">
+<meta property="og:updated_time" content="2019-11-26T09:27:59.885Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
@@ -175,7 +180,8 @@
 <a id="more"></a>
 
 <h3 id="LeNet体系结构（1990年代）"><a href="#LeNet体系结构（1990年代）" class="headerlink" title="LeNet体系结构（1990年代）"></a>LeNet体系结构（1990年代）</h3><p>LeNet是最早推动深度学习领域的卷积神经网络之一。 自1988年以来，Yann LeCun的这项开创性工作在经过多次成功的迭代之后被命名为LeNet5 [ 3 ]。当时LeNet架构主要用于字符识别任务，例如读取邮政编码，数字等。</p>
-<p>下面，我们将对LeNet架构如何学习识别图像进行直观了解。近年来，已经提出了几种新的体系结构，这些体系结构是对LeNet的改进，但是它们都使用LeNet的主要概念，如果您对LeNet有了清楚的了解，则相对容易理解。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN0.png" alt></p>
+<p>下面，我们将对LeNet架构如何学习识别图像进行直观了解。近年来，已经提出了几种新的体系结构，这些体系结构是对LeNet的改进，但是它们都使用LeNet的主要概念，如果您对LeNet有了清楚的了解，则相对容易理解。</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN0.png" alt></p>
 <p>从上图可以明显看出，在接收到船图像作为输入时，网络会正确分配所有四个类别中船的最高概率（0.94）。输出层中所有概率的总和应为1。</p>
 <p>上面图片所示的卷积层中有四个主要操作:  </p>
 <ol>
@@ -190,14 +196,32 @@
 <h3 id="卷积步骤"><a href="#卷积步骤" class="headerlink" title="卷积步骤"></a>卷积步骤</h3><p>对于ConvNet，卷积的主要目的是从输入图像中提取特征。<br>在此不讨论卷积的数学细节，仅尝试了解卷积在图像上的工作原理。</p>
 <p>每个图像都可以视为像素值的矩阵。考虑一个5 x 5图像，其像素值仅为0和1（请注意，对于灰度图像，像素值的范围为0到255，下面的绿色矩阵是像素值仅为0和1的特殊情况）：</p>
 <p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN2.png" alt></p>
-<p>另外，考虑另一个3 x 3矩阵(卷积核)，如下所示：<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN3.png" alt></p>
-<p>然后，可以计算出5 x 5图像和3 x 3矩阵的卷积，如下图中的动画所示：</p>
+<p>另外，考虑另一个3 x 3矩阵(卷积核)，如下所示：</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN3.png" alt></p>
+<p>然后，可以计算出5 x 5图像和3 x 3矩阵的卷积，如下图中的动画所示：  </p>
 <p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN4.gif" alt></p>
 <blockquote>
-<p>进行卷积运算后输出的矩阵称为卷积特征或特征图<br>卷积有助于我们找到特定的局部图像特征（如边缘），用于后面的网络中</p>
+<p>进行卷积运算后输出的矩阵称为卷积特征或特征图<br>卷积有助于我们找到特定的局部图像特征（如边缘），用于后面的网络中<br>如果卷积核步长大于1，则相当于进行下采样。</p>
 </blockquote>
-<p>###边缘填充</p>
-<h3 id="接下来举个🌰"><a href="#接下来举个🌰" class="headerlink" title="接下来举个🌰"></a>接下来举个🌰</h3>
+<h3 id="边缘填充"><a href="#边缘填充" class="headerlink" title="边缘填充"></a>边缘填充</h3><p>通常，我们希望卷积运算后的输出图像（特征图）与输入图像的大小相同。因此需要在图像周围添加零，让我们可以在更多位置叠加过滤器（卷积核）。</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN5.jpg" alt></p>
+<p>输入图像和进行卷积计算后的特征图具有相同的大小，称之为 “相同” 填充（宽卷积）。不使用任何边缘填充称为 “有效” 填充（窄卷积）。</p>
+<h3 id="接下来举个🌰"><a href="#接下来举个🌰" class="headerlink" title="接下来举个🌰"></a>接下来举个🌰</h3><p>我们输入图像</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN6.png" alt><br>下面是经过不同卷积核卷积后得到特征图</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN7.png" alt></p>
+<p>这里有个超级容易理解的一个GIF图片<br>输入图像经过卷积运算后得到一个特征图如下：</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN8.gif" alt></p>
+<h3 id="特征图（卷积特征）的大小需要我们在执行卷积操作前确定的三个参数控制："><a href="#特征图（卷积特征）的大小需要我们在执行卷积操作前确定的三个参数控制：" class="headerlink" title="特征图（卷积特征）的大小需要我们在执行卷积操作前确定的三个参数控制："></a>特征图（卷积特征）的大小需要我们在执行卷积操作前确定的三个参数控制：</h3><ul>
+<li><b>深度</b>：深度对应于我们用于卷积运算的滤波器数量。我们使用三个不同的滤镜对原始船形图像进行卷积，从而产生了三个不同的特征图，如图所示。您可以将这三个特征图视为堆叠的2d矩阵，因此，特征图的“深度”将为3。</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN9.png" alt></p>
+<ul>
+<li><p><b>步长</b>：步长是我们将滤镜矩阵滑过输入矩阵的像素数。当跨度为1时，我们将滤镜一次移动一个像素。当跨度为2时，滤镜一次滑动2个像素即可。跨度较大将产生较小的特征图（下采样）。</p>
+</li>
+<li><p><b>零填充</b>：有时，在边界周围用零填充输入矩阵很方便，因此我们可以将滤镜应用于输入图像矩阵的边界元素。零填充的一个不错的功能是它允许我们控制特征图的大小。添加零填充也称为宽卷积，不使用零填充将是窄卷积。</p>
+</li>
+</ul>
+
       
 
       
