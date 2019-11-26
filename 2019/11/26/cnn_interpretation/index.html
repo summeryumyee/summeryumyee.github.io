@@ -31,7 +31,8 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN12.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN13.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN14.png">
-<meta property="og:updated_time" content="2019-11-26T10:31:07.596Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN15.png">
+<meta property="og:updated_time" content="2019-11-26T11:00:00.036Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
@@ -253,8 +254,37 @@
 <li>使网络对于输入图像中的小变形，畸变和平移不变(输入中的小畸变不会改变Pooling的输出-因为我们在局部邻域中取最大值/平均值).</li>
 <li>帮助我们获得图像的几乎不变的不变表示（确切的术语是“相等”）。这是非常强大的功能，因为无论对象位于何处，我们都可以检测到它们.</li>
 </ul>
-<h3 id="快结束了！！"><a href="#快结束了！！" class="headerlink" title="快结束了！！"></a>快结束了！！</h3><p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN14.png" alt></p>
+<h3 id="目前为止的故事"><a href="#目前为止的故事" class="headerlink" title="目前为止的故事"></a>目前为止的故事</h3><p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN14.png" alt></p>
 <p>到目前为止，我们已经了解了卷积，ReLU和池化如何工作。重要的是要了解这些层是任何CNN的基本构建基块。如上图所示，我们有两组卷积，ReLU和Pooling层-第二卷积层使用六个过滤器在第一池化层的输出上执行卷积，以生成总共六个特征图。然后，将ReLU分别应用于所有这六个功能图。然后，我们分别对六个整流后的特征图执行最大池化操作。</p>
+<h3 id="全连接层"><a href="#全连接层" class="headerlink" title="全连接层"></a>全连接层</h3><p>全连接层是传统的多层感知器，在输出层中使用softmax激活功能（也可以使用其他分类器，例如SVM，但在本文中将坚持使用softmax）。术语“完全连接”表示上一层中的每个神经元都连接到下一层中的每个神经元。</p>
+<p>卷积和池化层的输出代表输入图像的高级特征。完全连接层的目的是使用这些功能根据训练数据集将输入图像分类为各种类别。例如，我们开始执行的图像分类任务具有四个可能的输出，如下图所示（请注意，下图未显示全连接层中节点之间的连接）</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN15.png" alt></p>
+<center><font color="red">全连接的层-每个节点都连接到相邻层中的每个其他节点</font></center>
+
+<p>除了分类之外，添加全连接的层也是学习这些功能的非线性组合的一种通常的方法。来自卷积层和池化层的大多数特征对于分类任务可能是好的，但是这些特征的组合可能甚至更好。</p>
+<p>全连接层的输出概率之和为1。这可以通过使用Softmax作为完全连接层的输出层中的激活函数来确保。Softmax函数采用任意实值分数的向量并将其压扁为零和一之间的值之和，这些值之和为一。</p>
+<h3 id="反向传播训练"><a href="#反向传播训练" class="headerlink" title="反向传播训练"></a>反向传播训练</h3><p>我自己在仔细看看<del>~</del></p>
+<h3 id="可视化卷积神经网络"><a href="#可视化卷积神经网络" class="headerlink" title="可视化卷积神经网络"></a>可视化卷积神经网络</h3><p><a href="http://scs.ryerson.ca/~aharley/vis/conv/flat.html" target="_blank" rel="noopener">http://scs.ryerson.ca/~aharley/vis/conv/flat.html</a><br>记得科学上网</p>
+<h3 id="其他卷积神经网络架构"><a href="#其他卷积神经网络架构" class="headerlink" title="其他卷积神经网络架构"></a>其他卷积神经网络架构</h3><p>卷积神经网络自1990年代初开始出现。我们在上面讨论了LeNet，它 是最早的卷积神经网络之一。其他一些有影响力的体系结构在下面中列出。</p>
+<ul>
+<li><p>LeNet（1990年代）：已在本文中介绍。</p>
+</li>
+<li><p>990年代至2012年：在1990年代末至2010年代初，卷积神经网络得到了发展。随着越来越多的数据和计算能力的不断提高，卷积神经网络可以解决的任务变得越来越有趣。</p>
+</li>
+<li><p>AlexNet（2012）–  2012年，Alex Krizhevsky（及其他人）发布了AlexNet，它是LeNet的更深，更广泛的版本，并在2012年获得了艰难的ImageNet大规模视觉识别挑战赛（ILSVRC）的冠军。相对于以前的方法和CNN的当前广泛应用而言，这是一项重大突破。</p>
+</li>
+<li><p>ZF Net（2013）– 2013年  ILSVRC冠军是Matthew Zeiler和Rob Fergus的卷积网络。它被称为ZFNet（Zeiler＆Fergus Net的缩写）。通过调整体系结构超参数，这是对AlexNet的改进。</p>
+</li>
+<li><p>GoogLeNet（2014）– 2014年  ILSVRC获奖者是Szegedy等人的卷积网络。来自Google。它的主要贡献是开发了一个Inception模块，该模块大大减少了网络中的参数数量（4M，而AlexNet为60M）。</p>
+</li>
+<li><p>VGGNet（2014）– ILSVRC 2014  的亚军是被称为VGGNet的网络。它的主要贡献在于表明网络深度（层数）是获得良好性能的关键因素。</p>
+</li>
+<li><p>ResNets（2015）–由Kaiming  He（及其他人）开发的残差网络赢得了ILSVRC 2015的冠军。ResNets目前是最先进的卷积神经网络模型，并且是在实践中使用ConvNets的默认选择（截至2016年5月） ）。</p>
+</li>
+<li><p>DenseNet（2016年8月）–由Gao Huang（及其他作者）发表的  Densely Connected卷积网络  使每一层都以前馈方式直接连接到其他每一层。事实证明，DenseNet在五个高度竞争的对象识别基准测试任务上比以前的最新体系结构有了显着改进。</p>
+</li>
+</ul>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>CNN牛逼嗷，卷积牛逼，池化牛逼，ReLU牛逼<br>我要继续去学习全连接层的详细信息，在看看softmax.</p>
 
       
 
@@ -507,6 +537,14 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">SSD</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">SSD-mobilev1</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
               </li>
              
@@ -520,14 +558,6 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">Faster R-CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">SSD</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">SSD-mobilev1</a>
               </li>
             
             <div class="clearfix"></div>
