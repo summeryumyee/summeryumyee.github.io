@@ -6,18 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>2019年11月 | 喜欢就坚持把</title>
+  <title>卷积神经网络的简单总结 | 喜欢就坚持把</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2019年11月18日  搭建个人博客  背诵英语单词   2019年11月19日  英语单词 英语翻译  安装Tensorflow object detection API   2019年11月20日  clone 基于SpringBoot + Mybatis + Thymeleaf + Redis + MongoDB + MySQL开发的商品管理系统英语单词 翻译听力   2019年11月2">
-<meta name="keywords" content="每日任务">
+  <meta name="description" content="参考资料 ：https:&#x2F;&#x2F;ujjwalkarn.me&#x2F;2016&#x2F;08&#x2F;11&#x2F;intuitive-explanation-convnets&#x2F;">
+<meta name="keywords" content="CNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019年11月">
-<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;18&#x2F;my-first-blog&#x2F;index.html">
+<meta property="og:title" content="卷积神经网络的简单总结">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;cnn_interpretation&#x2F;index.html">
 <meta property="og:site_name" content="喜欢就坚持把">
-<meta property="og:description" content="2019年11月18日  搭建个人博客  背诵英语单词   2019年11月19日  英语单词 英语翻译  安装Tensorflow object detection API   2019年11月20日  clone 基于SpringBoot + Mybatis + Thymeleaf + Redis + MongoDB + MySQL开发的商品管理系统英语单词 翻译听力   2019年11月2">
+<meta property="og:description" content="参考资料 ：https:&#x2F;&#x2F;ujjwalkarn.me&#x2F;2016&#x2F;08&#x2F;11&#x2F;intuitive-explanation-convnets&#x2F;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-11-26T05:57:13.683Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN1.gif">
+<meta property="og:updated_time" content="2019-11-26T06:13:48.755Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
     <link rel="alternative" href="/atom.xml" title="喜欢就坚持把" type="application/atom+xml">
   
@@ -145,68 +148,42 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-my-first-blog" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-cnn_interpretation" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      2019年11月
+      卷积神经网络的简单总结
     </h1>
   
 
         
-        <a href="/2019/11/18/my-first-blog/" class="archive-article-date">
-  	<time datetime="2019-11-18T09:20:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-18</time>
+        <a href="/2019/11/26/cnn_interpretation/" class="archive-article-date">
+  	<time datetime="2019-11-26T05:59:47.998Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-11-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li><p>2019年11月18日</p>
-<blockquote>
-<p>搭建个人博客<br>  背诵英语单词</p>
-</blockquote>
-</li>
-<li><p>2019年11月19日</p>
-<blockquote>
-<p>英语单词 英语翻译<br>  安装Tensorflow object detection API</p>
-</blockquote>
-</li>
-<li><p>2019年11月20日</p>
-<blockquote>
-<p>clone 基于SpringBoot + Mybatis + Thymeleaf + Redis + MongoDB + MySQL开发的商品管理系统<br>英语单词 翻译听力</p>
-</blockquote>
-</li>
-<li><p>2019年11月21日</p>
-<blockquote>
-<p>练鼓<br>  英语单词<br> 《TensorFlow2深度学习》P61</p>
-</blockquote>
-</li>
-<li><p>2019年11月22日</p>
-<blockquote>
-<p>生病了 休息</p>
-</blockquote>
-</li>
-<li><p>2019年11月23日</p>
-<blockquote>
-<p>英语<br>  工程数学(感谢张同学教学)<br>  《TensorFlow2深度学习》P76</p>
-</blockquote>
-</li>
-<li><p>2019年11月24日</p>
-<blockquote>
-<p>英语单词<br>  工程数学（感谢张同学教学）</p>
-</blockquote>
-</li>
-<li><p>2019年11月25日</p>
-<blockquote>
-<p>英语<br>  阅读《Rich feature hierarchies for accurate object detection and semantic segmentation》2014<br>  TensorFlow2深度学习<br>  对卷积神经网络进一步了解  卷积 池化 全连接层 ！！！！<br>  《TensorFlow2深度学习》P83</p>
-</blockquote>
-</li>
-</ul>
+        <p>参考资料 ：<a href="https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/" target="_blank" rel="noopener">https://ujjwalkarn.me/2016/08/11/intuitive-explanation-convnets/</a></p>
+<a id="more"></a>
+
+<h3 id="LeNet体系结构（1990年代）"><a href="#LeNet体系结构（1990年代）" class="headerlink" title="LeNet体系结构（1990年代）"></a>LeNet体系结构（1990年代）</h3><p>LeNet是最早推动深度学习领域的卷积神经网络之一。 自1988年以来，Yann LeCun的这项开创性工作在经过多次成功的迭代之后被命名为LeNet5 [ 3 ]。当时LeNet架构主要用于字符识别任务，例如读取邮政编码，数字等。</p>
+<p>下面，我们将对LeNet架构如何学习识别图像进行直观了解。近年来，已经提出了几种新的体系结构，这些体系结构是对LeNet的改进，但是它们都使用LeNet的主要概念，如果您对LeNet有了清楚的了解，则相对容易理解。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN0.png" alt></p>
+<p>从上图可以明显看出，在接收到船图像作为输入时，网络会正确分配所有四个类别中船的最高概率（0.94）。输出层中所有概率的总和应为1。</p>
+<p>上面图片所示的卷积层中有四个主要操作:  </p>
+<ol>
+<li>卷积</li>
+<li>增加非线性（ReLU）</li>
+<li>合并或下采样</li>
+<li>分类（全连接层）</li>
+</ol>
+<h3 id="图像是像素值的矩阵"><a href="#图像是像素值的矩阵" class="headerlink" title="图像是像素值的矩阵"></a>图像是像素值的矩阵</h3><p>本质上，每个图像都可以表示为像素值矩阵。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN1.gif" alt></p>
+<p><font color="red">通道</font>是一个常规术语，用于指代图像的某个组成部分。来自标准数码相机的图像将具有三个通道-红色，绿色和蓝色-您可以将它们想象成三个彼此叠加的2d矩阵（每种颜色一个），每个像素值的范围为0到255。</p>
+<p>一个灰度图像，只有一个信道。我们仅考虑灰度图像，因此我们将使用一个表示图像的2d矩阵。矩阵中每个像素的值范围为0到255-零表示黑色，而255表示白色。</p>
 
       
 
@@ -241,13 +218,24 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color5">每日任务</a>
+        			<a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag article-tag-list-link color4">CNN</a>
         		</li>
       		
 		</ul>
 	</div>
 
       
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/深度学习//" class="article-tag-list-link color5">深度学习</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
 
       
 
@@ -297,7 +285,7 @@
     <a class="close js-modal-close" href="javascript:;" target="_blank" rel="noopener"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/18/my-first-blog/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/11/26/cnn_interpretation/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -311,15 +299,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2019/11/19/object-detection-summary/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          目标检测部分算法
-        
-      </div>
-    </a>
   
+    <a href="/2019/11/19/object-detection-summary/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">目标检测部分算法</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
