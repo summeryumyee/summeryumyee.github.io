@@ -27,7 +27,10 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN8.gif">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN9.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN10.png">
-<meta property="og:updated_time" content="2019-11-26T09:48:58.689Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN11.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN12.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN13.png">
+<meta property="og:updated_time" content="2019-11-26T10:12:42.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
@@ -225,6 +228,22 @@
 <h3 id="引入非线性（ReLU）"><a href="#引入非线性（ReLU）" class="headerlink" title="引入非线性（ReLU）"></a>引入非线性（ReLU）</h3><p>在每个卷积运算之后，都使用了一个ReLU的附加运算，ReLU代表整流线性单元，是一种非线性运算。其输出如下：</p>
 <p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN10.png" alt></p>
 <center><font color="red">ReLU操作</font></center>
+
+<p>ReLU是一种元素运算的操作（应用于每个像素），并将特征图中的所有负像素值替换为零。ReLU的目的是在我们的ConvNet中引入非线性，因为我们希望我们的ConvNet学习的大多数现实世界数据都是非线性的（卷积是线性运算–矩阵乘法和加法运算，因此我们通过引入诸如ReLU之类的非线性函数来解决非线性问题。</p>
+<p>下面的图可以清楚的了解ReLU操作，这里的输出要素图也成为“整流”要素图。</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN11.png" alt></p>
+<center><font color="red">ReLU操作</font></center>
+也可以使用其他非线性函数（例如  tanh或  Sigmoid）代替ReLU，但是已经发现ReLU在大多数情况下的性能更好。（ReLU🐮比嗷）
+
+<h3 id="池化层"><a href="#池化层" class="headerlink" title="池化层"></a>池化层</h3><p>空间池化（也称为子采样或下采样）降低了每个特征图的维数，但保留了最重要的信息。池化层可以有不同的类型：最大值，平均值，总和等。</p>
+<p>在“最大池化”的情况下，我们定义一个空间邻域（例如2×2窗口），并从该窗口内经过校正的特征图中获取最大的元素。除了获取最大元素外，我们还可以获取该窗口中所有元素的平均值（平均池）或总和。在实践中，Max Pooling已显示出更好的效果。</p>
+<p>下图显示了使用2×2窗口在整流特征图上进行最大池化操作的示例（在卷积+ ReLU操作之后获得）。</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN12.png" alt></p>
+<center><font color="red">最大值池化</font></center>
+我们将2 x 2的窗口滑动2个单元格（也称为“步长”），并在每个区域取最大值。如图所示，这减小了特征图的维数。
+
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN13.png" alt></p>
+<center><font color="red">应用于整流后的特征图的池化</font></center>
 
       
 
@@ -473,19 +492,15 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">CNN</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">SSD</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">SSD-mobilev1</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color4">CNN</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -498,6 +513,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color3">Faster R-CNN</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" target="_blank" rel="noopener" class="js-tag color5">每日任务</a>
               </li>
             
             <div class="clearfix"></div>
