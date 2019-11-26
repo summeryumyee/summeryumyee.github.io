@@ -6,19 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>卷积神经网络的简单总结 | 喜欢就坚持把</title>
+  <title>卷积神经网络是什么？有什么用？ | 喜欢就坚持把</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="参考资料 ：https:&#x2F;&#x2F;ujjwalkarn.me&#x2F;2016&#x2F;08&#x2F;11&#x2F;intuitive-explanation-convnets&#x2F;">
 <meta name="keywords" content="CNN">
 <meta property="og:type" content="article">
-<meta property="og:title" content="卷积神经网络的简单总结">
+<meta property="og:title" content="卷积神经网络是什么？有什么用？">
 <meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2019&#x2F;11&#x2F;26&#x2F;cnn_interpretation&#x2F;index.html">
 <meta property="og:site_name" content="喜欢就坚持把">
 <meta property="og:description" content="参考资料 ：https:&#x2F;&#x2F;ujjwalkarn.me&#x2F;2016&#x2F;08&#x2F;11&#x2F;intuitive-explanation-convnets&#x2F;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN1.gif">
-<meta property="og:updated_time" content="2019-11-26T06:13:48.755Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN2.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN3.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN4.gif">
+<meta property="og:updated_time" content="2019-11-26T08:58:42.221Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;img&#x2F;CNN0.png">
   
@@ -155,7 +158,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      卷积神经网络的简单总结
+      卷积神经网络是什么？有什么用？
     </h1>
   
 
@@ -184,7 +187,17 @@
 <h3 id="图像是像素值的矩阵"><a href="#图像是像素值的矩阵" class="headerlink" title="图像是像素值的矩阵"></a>图像是像素值的矩阵</h3><p>本质上，每个图像都可以表示为像素值矩阵。<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN1.gif" alt></p>
 <p><font color="red">通道</font>是一个常规术语，用于指代图像的某个组成部分。来自标准数码相机的图像将具有三个通道-红色，绿色和蓝色-您可以将它们想象成三个彼此叠加的2d矩阵（每种颜色一个），每个像素值的范围为0到255。</p>
 <p>一个灰度图像，只有一个信道。我们仅考虑灰度图像，因此我们将使用一个表示图像的2d矩阵。矩阵中每个像素的值范围为0到255-零表示黑色，而255表示白色。</p>
-
+<h3 id="卷积步骤"><a href="#卷积步骤" class="headerlink" title="卷积步骤"></a>卷积步骤</h3><p>对于ConvNet，卷积的主要目的是从输入图像中提取特征。<br>在此不讨论卷积的数学细节，仅尝试了解卷积在图像上的工作原理。</p>
+<p>每个图像都可以视为像素值的矩阵。考虑一个5 x 5图像，其像素值仅为0和1（请注意，对于灰度图像，像素值的范围为0到255，下面的绿色矩阵是像素值仅为0和1的特殊情况）：</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN2.png" alt></p>
+<p>另外，考虑另一个3 x 3矩阵(卷积核)，如下所示：<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN3.png" alt></p>
+<p>然后，可以计算出5 x 5图像和3 x 3矩阵的卷积，如下图中的动画所示：</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/img/CNN4.gif" alt></p>
+<blockquote>
+<p>进行卷积运算后输出的矩阵称为卷积特征或特征图<br>卷积有助于我们找到特定的局部图像特征（如边缘），用于后面的网络中</p>
+</blockquote>
+<p>###边缘填充</p>
+<h3 id="接下来举个🌰"><a href="#接下来举个🌰" class="headerlink" title="接下来举个🌰"></a>接下来举个🌰</h3>
       
 
       
