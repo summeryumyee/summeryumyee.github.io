@@ -16,8 +16,11 @@
 <meta property="og:site_name" content="喜欢就坚持把">
 <meta property="og:description" content="《Rich Feature Hierarchies for Accurate Object Detection and Semantic Segmentation》">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-12-02T03:50:38.483Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;r-cnn&#x2F;0.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;r-cnn&#x2F;1.png">
+<meta property="og:updated_time" content="2019-12-02T05:19:14.470Z">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;raw.githubusercontent.com&#x2F;summeryumyee&#x2F;summeryumyee.github.io&#x2F;master&#x2F;assets&#x2F;r-cnn&#x2F;0.png">
   
     <link rel="alternative" href="/atom.xml" title="喜欢就坚持把" type="application/atom+xml">
   
@@ -173,6 +176,27 @@
 <h3 id="一、基础知识"><a href="#一、基础知识" class="headerlink" title="一、基础知识"></a>一、基础知识</h3><h3 id="1-有监督预训练与无监督预训练"><a href="#1-有监督预训练与无监督预训练" class="headerlink" title="1.有监督预训练与无监督预训练"></a>1.有监督预训练与无监督预训练</h3><p>(1)无监督预训练(Unsupervised pre-training)<br>无监督预训练，即预训练阶段的样本不需要人工标注数据，所以就叫做无监督预训练。</p>
 <p>(2)有监督预训练(Supervised pre-training)<br>所谓有监督预训练，我们也可以把它称之为迁移学习。比如你已经有一大堆标注好的人脸年龄分类的图片数据，训练了一个CNN，用于人脸的年龄识别。然后当你遇到新的项目任务是：人脸性别识别，那么这个时候你可以利用已经训练好的年龄识别CNN模型，去掉最后一层，然后其它的网络层参数就直接复制过来，继续进行训练。这就是所谓的迁移学习，说的简单一点就是把一个任务训练好的参数，拿到另外一个任务，作为神经网络的初始参数值,这样相比于你直接采用随机初始化的方法，精度可以有很大的提高。</p>
 <p>图片分类标注好的训练数据非常多，但是物体检测的标注数据却很少，如何用少量的标注数据，训练高质量的模型，这就是文献最大的特点，这篇论文采用了迁移学习的思想。文章先用了ILSVRC2012这个训练数据库（这是一个图片分类训练数据库），先进行网络的图片分类训练。这个数据库有大量的标注数据，共包含了1000种类别物体，因此预训练阶段CNN模型的输出是1000个神经元，或者我们也直接可以采用Alexnet训练好的模型参数。</p>
+<h3 id="2-IOU的定义"><a href="#2-IOU的定义" class="headerlink" title="2.IOU的定义"></a>2.IOU的定义</h3><h3 id="3-非极大值抑制"><a href="#3-非极大值抑制" class="headerlink" title="3.非极大值抑制"></a>3.非极大值抑制</h3><h3 id="二、算法总体思路"><a href="#二、算法总体思路" class="headerlink" title="二、算法总体思路"></a>二、算法总体思路</h3><p>论文采用的算法思路是：首先输入一张图片，我们先通过Selective Search定位出2000个物体候选框，然后采用CNN提取每个候选框中图片的特征向量，特征向量的维度为4096维，接着采用svm算法对各个候选框中的物体进行分类识别。<br>也就是总个过程分为三个步骤：<br><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/r-cnn/0.png" alt></p>
+<h3 id="（一）候选框搜索阶段"><a href="#（一）候选框搜索阶段" class="headerlink" title="（一）候选框搜索阶段"></a>（一）候选框搜索阶段</h3><p>当我们输入一张图片时，我们要搜索出所有可能是物体的区域，通过Selective Search算法我们搜索出2000个左右候选框。这些候选框是矩形的，并且大小各不相同。然而CNN对输入图片的大小是固定的，因此对于每个输入的候选框都需要缩放到固定的大小。<br>为了简单起见，我们假设下一阶段CNN所需要的输入图片大小是个正方形图片227*227。对于缩放处理，论文试验了两种不同的处理方法：</p>
+<h3 id="1-各向异性缩放"><a href="#1-各向异性缩放" class="headerlink" title="(1)各向异性缩放"></a>(1)各向异性缩放</h3><p>这种方法简单粗暴，直接不管图片的长宽比例，不管它是否扭曲，直接进行缩放，全部缩放到CNN输入的大小227*227，如下图(D)所示；</p>
+<h3 id="2-各向同性缩放"><a href="#2-各向同性缩放" class="headerlink" title="(2)各向同性缩放"></a>(2)各向同性缩放</h3><p>因为图片扭曲后，估计会对后续CNN的训练精度有影响，于是作者也测试了“各向同性缩放”方案。具体有两种办法:</p>
+<p><strong>a)直接在原始图片中，把bounding box的边界进行扩展延伸成正方形，然后再进行裁剪</strong>;如果已经延伸到了原始图片的外边界，那么就用bounding box中的颜色均值填充；如下图(B)所示;</p>
+<p><strong>b)先把bounding box图片裁剪出来，然后用固定的背景颜色填充成正方形图片</strong>(背景颜色也是采用bounding box的像素颜色均值),如下图©所示;</p>
+<p><img src="https://raw.githubusercontent.com/summeryumyee/summeryumyee.github.io/master/assets/r-cnn/1.png" alt></p>
+<p>完成上面处理完后，可以得到指定大小的图片，因为我们后面还要继续用这2000个候选框图片，继续训练CNN、SVM。然而人工标注的数据一张图片中就只标注了正确的bounding box，我们搜索出来的2000个矩形框也不可能会出现一个与人工标注完全匹配的候选框。因此我们需要用IOU为2000个bounding box打标签，以便下一步CNN训练使用。在CNN阶段，如果用selective search挑选出来的候选框与物体的人工标注矩形框的重叠区域IoU大于0.5，那么我们就把这个候选框标注成物体类别，否则我们就把它当做背景类别。</p>
+<h3 id="（二）CNN特征提取步骤"><a href="#（二）CNN特征提取步骤" class="headerlink" title="（二）CNN特征提取步骤"></a>（二）CNN特征提取步骤</h3><p>a)网络结构设计阶段<br>网络架构我们有两个可选方案：第一选择经典的Alexnet；第二选择VGG16。经过测试Alexnet精度为58.5%，VGG16精度为66%。VGG这个模型的特点是选择比较小的卷积核、选择较小的跨步，这个网络的精度高，不过计算量是Alexnet的7倍。为了简单起见，我们就直接选用Alexnet，Alexnet特征提取部分包含了5个卷积层、2个全连接层，在Alexnet中p5层神经元个数为9216、 f6、f7的神经元个数都是4096，通过这个网络训练完毕后，最后提取特征每个输入候选框图片都能得到一个4096维的特征向量。</p>
+<p>b)网络有监督预训练阶段<br>参数初始化部分：目标检测的一个难点在于，物体标签训练数据少，如果要直接采用随机初始化CNN参数的方法，那么目前的训练数据量是远远不够的。这种情况下，最好的是采用某些方法，把参数初始化了，然后在进行有监督的参数微调，论文采用的是有监督的预训练。所以论文在设计网络结构的时候，是直接用Alexnet的网络，然后连参数也是直接采用它的参数，作为初始的参数值，然后再fine-tuning训练。<br>网络优化求解：采用随机梯度下降法，学习速率大小为0.001；</p>
+<p>c)fine-tuning阶段<br>接着采用selective search 搜索出来的候选框，然后处理到指定大小图片，继续对上面预训练的cnn模型进行fine-tuning训练。假设要检测的物体类别有N类，那么我们就需要把上面预训练阶段的CNN模型的最后一层给替换掉，替换成N+1个输出的神经元(加1是因为还有一个背景)，然后这一层直接采用参数随机初始化的方法，其它网络层的参数不变；接着就可以开始继续SGD训练了。开始的时候，SGD学习率选择0.001，在每次训练的时候，batch size大小选择128，其中32个是正样本、96个为负样本。</p>
+<h3 id="SVM训练、测试阶段"><a href="#SVM训练、测试阶段" class="headerlink" title="SVM训练、测试阶段"></a>SVM训练、测试阶段</h3><p>这是一个二分类问题，我么假设我们要检测车辆。我们知道只有当bounding box把整量车都包含在内，那才叫正样本；如果bounding box 没有包含到车辆，那么我们就可以把它当做负样本。但问题是当我们的检测窗口只有部分包好物体，那该怎么定义正负样本呢？<br>作者测试了IOU阈值各种方案数值0,0.1,0.2,0.3,0.4,0.5。最后我们通过训练发现，如果选择IOU阈值为0.3效果最好（选择为0精度下降了4个百分点，选择0.5精度下降了5个百分点）,即当重叠度小于0.3的时候，我们就把它标注为负样本。一旦CNN f7层特征被提取出来，那么我们将为每个物体累训练一个svm分类器。当我们用CNN提取2000个候选框，可以得到20004096这样的特征向量矩阵，然后我们只需要把这样的一个矩阵与svm权值矩阵4096N点乘(N为分类类别数目，因为我们训练的N个svm，每个svm包好了4096个W)，就可以得到结果了。</p>
+<h3 id="回顾"><a href="#回顾" class="headerlink" title="回顾"></a>回顾</h3><p>1、CNN都是用于提取特征，那么可以直接用Alexnet做特征提取，省去fine-tuning阶段吗？<br>这个是可以的，可以不需重新训练CNN，直接采用Alexnet模型，提取出p5、或者f6、f7的特征，作为特征向量，然后进行训练svm，只不过这样精度会比较低。</p>
+<p>2、如果没有fine-tuning的时候，要选择哪一层的特征作为cnn提取到的特征呢？我们有可以选择p5、f6、f7，这三层的神经元个数分别是9216、4096、4096。从p5到p6这层的参数个数是：40969216 ，从f6到f7的参数是40964096。那么具体是选择p5、还是f6，又或者是f7呢？</p>
+<p>论文给我们证明了一个理论，如果你不进行fine-tuning，也就是你直接把Alexnet模型当做万金油使用，类似于HOG、SIFT一样做特征提取，不针对特定的任务。然后把提取的特征用于分类，结果发现p5的精度竟然跟f6、f7差不多，而且f6提取到的特征还比f7的精度略高；如果你进行fine-tuning了，那么f7、f6的提取到的特征最会训练的svm分类器的精度就会很大提升。</p>
+<p>据此我们发现，如果不针对特定任务进行fine-tuning，而是把CNN当做特征提取器，卷积层所学到的特征其实就是基础的共享特征提取层，就类似于SIFT算法一样，可以用于提取各种图片的特征，而f6、f7所学习到的特征是用于针对特定任务的特征。打个比方：对于人脸性别识别来说，一个CNN模型前面的卷积层所学习到的特征就类似于学习人脸共性特征，然后全连接层所学习的特征就是针对性别分类的特征了。</p>
+<p>3、CNN训练的时候，本来就是对bounding box的物体进行识别分类训练，是一个端到端的任务，在训练的时候最后一层softmax就是分类层，那么为什么作者要先用CNN做特征提取（提取fc7层数据），然后再把提取的特征用于训练svm分类器？</p>
+<p>这个是因为svm训练和cnn训练过程的正负样本定义方式各有不同，导致最后采用CNN softmax输出比采用svm精度还低。<br>CNN在训练的时候，对训练数据做了比较宽松的标注，比如一个bounding box可能只包含物体的一部分，那么我也把它标注为正样本，用于训练CNN；采用这个方法的主要原因在于因为CNN容易过拟合，所以需要大量的训练数据，所以在CNN训练阶段我们是对Bounding box的位置限制条件限制的比较松(IOU只要大于0.5都被标注为正样本了)；<br>然而svm训练的时候，因为svm适用于少样本训练，所以对于训练样本数据的IOU要求比较严格，我们只有当bounding box把整个物体都包含进去了，我们才把它标注为物体类别，然后训练svm。</p>
+<p>4、当然，R-CNN也有很多缺点：</p>
+<p>1)重复计算：R-CNN虽然不再是穷举，但依然有2000个左右的候选框，这些候选框都需要进行CNN操作，计算量依然很大，其中有不少其实是重复计算；<br>2)SVM模型：而且还是线性模型，在标注数据不缺的时候显然不是最好的选择；<br>3)训练测试分为多步，训练的空间和时间代价很高：区域提名、特征提取、分类、回归都是断开的训练的过程，中间数据还需要单独保存，卷积出来的特征需要先存在硬盘上，这些特征需要几百G的存储空间；<br>4)速度慢：前面的缺点最终导致R-CNN出奇的慢，GPU上处理一张图片需要13秒，CPU上则需要53秒。</p>
+<p>看到这里，肯定不少小伙伴会产生疑惑，既然R-CNN速度很慢，那为什么还说它是改进版？事实上，R-CNN的改进体现在其效果上的提升，其中ILSVRC 2013数据集上的mAP由OverFeat的24.3%提升到了31.4%，第一次有了质的改变。</p>
 
       
 
